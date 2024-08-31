@@ -1,16 +1,18 @@
-# H&E Color Normalization Algorithm
+# H&E Color Normalization and TIL Detection Algorithm
 
 ## Overview
-This repository contains scripts necessary to run the image normalization algorithm used in the Melanoma Interoperator Study (manuscript pending publication).
+This repository contains scripts necessary to run the image normalization and TIL detection algorithm used in the Melanoma Interoperator Study (manuscript pending publication).
 
 ## Running the Algorithm
-Please follow the steps outlined below to run the algorithm successfully. Note that the required file organization and process may not be entirely intuitive due to the nature of our development process, where the primary goal was ensuring the algorithm’s functionality rather than optimizing its structure. We encourage users familiar with the code to make their own optimzations and/or modifications if desired to improve the algorithm's flexibility and usability. 
+Please follow the steps outlined below to run the algorithm successfully. Note that the required file organization and process may not be entirely intuitive due to the nature of our development process, where the primary goal was ensuring the algorithm’s functionality rather than optimizing its structure. We encourage users familiar with the code to make their own optimizations and/or modifications if desired. 
+
+### Color-Normalizing H&E Images
 
 1. **Create a QuPath project and add one or more H&E images**
 
 2. **Create patches from the H&E images**
    - Navigate to the `groovy_files/` directory from the repository.
-   - Execute `create_patches.groovy` on the QuPath project (using the "Run for Project" option).
+   - Run `create_patches.groovy` on the QuPath project (use the "Run for Project" option if you have multiple images).
    - Locate the patches in the `tiles/` directory created in your QuPath project folder.
 
 3. **Run the MATLAB Project to color-normalize patches**
@@ -27,6 +29,18 @@ Please follow the steps outlined below to run the algorithm successfully. Note t
    - Open QuPath (no need to create a project) and navigate to `groovy_files/create_patches.groovy` script from the repository.
    - Run the script in QuPath. When prompted, select the parent directory you created as the input directory and specify an output directory for the stitched images.
    - Locate the stitched images in the output directory you specified.
+
+### Running the TIL Detection Algorithm
+
+1. **Create a QuPath project and add one or more color-normalized H&E images**
+
+2. **Run the TIL detection script**
+   - Navigate to the `groovy_files/` directory from the repository and run `ANNMAR24.groovy` on the QuPath project (use the "Run for Project" option if you have multiple images).
+   - Make sure to save the QuPath project after running the script.
+
+3. **View measurements**
+   - The TIL scores (e.g., eTILs, etTILs, etc.) for the images will appear on QuPath's measurements list. (Refer to this [link](https://qupath.readthedocs.io/en/latest/docs/concepts/measurements.html) from QuPath's official documentation for more details on viewing measurements.)
+   - If desired, you can export the measurements to a spreadsheet format. (Refer to this [link](https://qupath.readthedocs.io/en/stable/docs/tutorials/exporting_measurements.html) from QuPath's official documentation for more details on exporting measurements.)
 
 ## Dependencies
 - QuPath (tested on version 0.5.0)
